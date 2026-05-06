@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LearnScroll community card",
+  "type": "object",
+  "required": ["type", "language", "front", "source_name", "tags"],
+  "additionalProperties": false,
+  "properties": {
+    "type":          { "type": "string", "enum": ["fact","vocab","sentence","quiz","concept"] },
+    "language":      { "type": "string", "description": "BCP-47 code, e.g. 'en', 'ja'" },
+    "front":         { "type": "string", "maxLength": 280, "description": "Hook text (fact/concept) or target word (vocab)" },
+    "back":          { "type": "string", "description": "Meaning or answer" },
+    "context":       { "type": "string", "maxLength": 600 },
+    "source_name":   { "type": "string" },
+    "source_url":    { "type": "string", "format": "uri" },
+    "tags":          { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "difficulty":    { "type": "integer", "minimum": 1, "maximum": 5 },
+    "diagram_kind":  { "type": "string" },
+    "quiz_options":  { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 4 },
+    "quiz_answer":   { "type": "integer", "minimum": 0 }
+  },
+  "if":   { "properties": { "type": { "const": "quiz" } } },
+  "then": { "required": ["quiz_options", "quiz_answer"] }
+}

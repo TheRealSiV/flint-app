@@ -1,0 +1,12 @@
+# Before/after pairs for biology hook rewrites.
+# Add more pairs to improve rewrite quality for this topic.
+
+examples:
+  - before: "Octopuses have three hearts that pump blood through their bodies."
+    after:   "An octopus has three hearts — and two stop beating the moment it swims"
+
+  - before: "Honey is resistant to bacteria because of its low water content."
+    after:   "Honey never spoils — archaeologists have eaten 3,000-year-old jars from Egyptian tombs"
+
+  - before: "Bananas contain small amounts of the radioactive isotope potassium-40."
+    after:   "Bananas are slightly radioactive — and you'd need to eat 10 million in one sitting to get hurt"

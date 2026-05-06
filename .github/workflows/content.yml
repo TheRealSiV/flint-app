@@ -1,0 +1,28 @@
+name: Content lint
+
+on:
+  pull_request:
+    paths:
+      - "content/community/**/*.yaml"
+
+jobs:
+  lint:
+    name: Validate community cards
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Install ajv-cli
+        run: npm install -g ajv-cli
+
+      - name: Validate YAML against schema
+        run: |
+          for f in $(git diff --name-only origin/main...HEAD -- 'content/community/**/*.yaml'); do
+            echo "Validating $f"
+            ajv validate -s content/schema.json -d "$f" --spec=draft2020
+          done
+
+      - name: Check for duplicates (embedding cosine similarity)
+        run: echo "TODO: run lsctl dedupe check against staging DB"
+        # When ready: docker run --rm ghcr.io/learnscroll/ingest lsctl dedupe $f

@@ -1,0 +1,17 @@
+# Multi-stage build — final image ~25MB, no Go toolchain.
+FROM golang:1.23-alpine AS builder
+WORKDIR /src
+COPY services/api/go.mod services/api/go.sum ./
+RUN go mod download
+COPY services/api/ .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o /api ./cmd/api
+
+# Install goose for migrations
+RUN go install github.com/pressly/goose/v3/cmd/goose@latest
+
+FROM alpine:3.20
+RUN apk add --no-cache ca-certificates tzdata
+COPY --from=builder /api /usr/local/bin/api
+COPY --from=builder /go/bin/goose /usr/local/bin/goose
+EXPOSE 8080
+CMD ["api"]

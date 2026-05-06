@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "LearnScroll",
+    "slug": "learnscroll",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "learnscroll",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#FAF7F1"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.learnscroll.app"
+    },
+    "android": {
+      "package": "com.learnscroll.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FAF7F1"
+      }
+    },
+    "plugins": ["expo-router"]
+  }
+}

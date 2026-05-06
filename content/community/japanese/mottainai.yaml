@@ -1,0 +1,10 @@
+type: vocab
+language: ja
+front: "勿体無い"
+back: "wasteful; too good to waste; what a waste"
+context: >
+  もったいない encapsulates a feeling of regret over waste. It has no direct English equivalent —
+  the UN Environment Programme used it as a global slogan for sustainable consumption.
+source_name: Tatoeba · Core 6000
+tags: [ja, N3, culture]
+difficulty: 3

@@ -1,0 +1,21 @@
+# Replace learnscroll.app with your domain.
+# Caddy auto-provisions TLS via Let's Encrypt.
+
+learnscroll.app {
+    # Web app
+    reverse_proxy web:3000
+
+    # API under /v1 — proxied to the Go service
+    handle /v1/* {
+        reverse_proxy api:8080
+    }
+
+    # Compression + security headers
+    encode zstd gzip
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        -Server
+    }
+}

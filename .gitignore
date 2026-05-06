@@ -1,0 +1,61 @@
+# ── Dependencies ───────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Bun ────────────────────────────────────────────────────────
+bun.lockb
+
+# ── Next.js ────────────────────────────────────────────────────
+apps/web/.next/
+apps/web/out/
+
+# ── Expo / React Native ────────────────────────────────────────
+apps/mobile/.expo/
+apps/mobile/dist/
+apps/mobile/android/
+apps/mobile/ios/
+
+# ── Go builds ──────────────────────────────────────────────────
+services/*/bin/
+services/api/cmd/api/api
+services/enrich/cmd/enrich/enrich
+services/ingest/cmd/lsctl/lsctl
+
+# ── TypeScript ─────────────────────────────────────────────────
+packages/*/dist/
+packages/*/*.tsbuildinfo
+
+# ── Turbo ──────────────────────────────────────────────────────
+.turbo/
+
+# ── Environment ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+deploy/.env
+deploy/.env.*
+!deploy/.env.example
+
+# ── sqlc generated output ──────────────────────────────────────
+services/api/internal/db/*.go
+!services/api/internal/db/README.md
+
+# ── Test / coverage ────────────────────────────────────────────
+coverage/
+*.out
+
+# ── OS ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ────────────────────────────────────────────────────
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+npm-debug.log*

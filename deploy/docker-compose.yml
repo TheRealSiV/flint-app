@@ -1,0 +1,89 @@
+services:
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: learnscroll
+      POSTGRES_USER: learnscroll
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?required}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U learnscroll"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+
+  migrate:
+    image: ghcr.io/learnscroll/api:latest
+    command: goose -dir /db/migrations postgres "${DATABASE_URL}" up
+    environment:
+      DATABASE_URL: postgres://learnscroll:${POSTGRES_PASSWORD}@postgres:5432/learnscroll?sslmode=disable
+    depends_on:
+      postgres: { condition: service_healthy }
+    volumes:
+      - ../db/migrations:/db/migrations:ro
+
+  api:
+    image: ghcr.io/learnscroll/api:latest
+    restart: unless-stopped
+    environment:
+      ADDR: :8080
+      DATABASE_URL: postgres://learnscroll:${POSTGRES_PASSWORD}@postgres:5432/learnscroll?sslmode=disable
+      REDIS_URL: redis://redis:6379
+      SESSION_SECRET: ${SESSION_SECRET:?required}
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+      redis:   { condition: service_healthy }
+    ports:
+      - "127.0.0.1:8080:8080"
+
+  enrich:
+    image: ghcr.io/learnscroll/enrich:latest
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://learnscroll:${POSTGRES_PASSWORD}@postgres:5432/learnscroll?sslmode=disable
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:?required}
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+
+  web:
+    image: ghcr.io/learnscroll/web:latest
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: ${API_URL:-http://api:8080}
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - api
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - api
+      - web
+
+volumes:
+  postgres_data:
+  redis_data:
+  caddy_data:
+  caddy_config:
