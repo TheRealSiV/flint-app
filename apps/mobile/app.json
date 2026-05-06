@@ -1,21 +1,21 @@
 {
   "expo": {
-    "name": "LearnScroll",
-    "slug": "learnscroll",
+    "name": "Flint",
+    "slug": "flint",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "learnscroll",
+    "scheme": "flint",
     "userInterfaceStyle": "automatic",
     "splash": {
       "backgroundColor": "#FAF7F1"
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.learnscroll.app"
+      "bundleIdentifier": "com.flint.app"
     },
     "android": {
-      "package": "com.learnscroll.app",
+      "package": "com.flint.app",
       "adaptiveIcon": {
         "backgroundColor": "#FAF7F1"
       }

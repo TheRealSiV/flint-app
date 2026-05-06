@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  ORG: learnscroll
+  ORG: flint
 
 jobs:
   build-api:

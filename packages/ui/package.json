@@ -1,5 +1,5 @@
 {
-  "name": "@learnscroll/ui",
+  "name": "@flint/ui",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.ts",
@@ -13,11 +13,11 @@
     "react-native": "*"
   },
   "dependencies": {
-    "@learnscroll/core": "workspace:*",
-    "@learnscroll/icons": "workspace:*"
+    "@flint/core": "workspace:*",
+    "@flint/icons": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5",
-    "@learnscroll/config": "workspace:*"
+    "@flint/config": "workspace:*"
   }
 }

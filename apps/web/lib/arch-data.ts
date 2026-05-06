@@ -32,7 +32,7 @@ export const STACK = [
 ];
 
 export const REPO_TREE: TreeNode = {
-  name: 'learnscroll', kind: 'root',
+  name: 'flint', kind: 'root',
   children: [
     {
       name: 'apps', kind: 'dir', desc: 'User-facing apps. Each is independently deployable.',
@@ -91,7 +91,7 @@ export const REPO_TREE: TreeNode = {
         {
           name: 'ingest', kind: 'dir', desc: 'CLI tools that turn raw sources into our card schema.',
           children: [
-            { name: 'cmd/lsctl/main.go',           kind: 'file', desc: 'Single binary: `lsctl ingest <source> <path>`.' },
+            { name: 'cmd/flint/main.go',           kind: 'file', desc: 'Single binary: `flint ingest <source> <path>`.' },
             { name: 'internal/sources/anki.go',    kind: 'file', desc: 'Reads .apkg (zip → SQLite). Maps to vocab/quiz cards.' },
             { name: 'internal/sources/tatoeba.go', kind: 'file', desc: 'TSV bulk parse. Sentence cards.' },
             { name: 'internal/sources/wiki.go',    kind: 'file', desc: 'MediaWiki API. Lead paragraphs → fact/concept.' },
@@ -175,7 +175,7 @@ export const API_ROUTES: ApiRoute[] = [
   { group: 'Submit',   method: 'POST', path: '/v1/community/submit',    desc: 'User card submission → enqueues moderation.' },
 ];
 
-export const SCHEMA = `-- learnscroll/db/migrations/001_init.sql
+export const SCHEMA = `-- flint/db/migrations/001_init.sql
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -269,7 +269,7 @@ export const SCALING = [
 
 export const PIPELINE = [
   { step: '01 · Source',   name: 'Raw input',   desc: 'Anki .apkg, Tatoeba TSV, Wikipedia API, OpenStax JSON, community YAML.' },
-  { step: '02 · Ingest',   name: 'lsctl CLI',   desc: 'One Go binary, one parser per source. Outputs the unified card schema.' },
+  { step: '02 · Ingest',   name: 'flint CLI',   desc: 'One Go binary, one parser per source. Outputs the unified card schema.' },
   { step: '03 · Enrich',   name: 'Haiku batch', desc: 'Hook rewrite, distractors, related-card linking, difficulty tag, embedding.' },
   { step: '04 · Moderate', name: 'AI + human',  desc: 'Auto: facts, sources, dupes. Flagged → human queue. Rejected → reason logged.' },
   { step: '05 · Serve',    name: 'api → feed',  desc: 'Ranker pulls from cards + card_progress, applies mix rule, streams to client.' },

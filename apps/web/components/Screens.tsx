@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FEED_CARDS, THREADS, TOPICS, AnyCard } from '@/lib/data';
 import FeedCard from './Cards';
 
@@ -90,19 +90,61 @@ function FriendsStrip({ dark }: { dark: boolean }) {
 }
 
 // ── Feed screen ───────────────────────────────────────────────
+
+function apiCardToAnyCard(c: Record<string, unknown>): AnyCard {
+  const base = { id: c.id as string, tags: (c.tags as string[]) ?? [] };
+  const type = c.type as string;
+  if (type === 'vocab') {
+    return { ...base, type: 'vocab', word: c.front as string, reading: '', meaning: (c.back as string) ?? '', pos: '', pitch: '', level: '', example: (c.context as string) ?? '', exampleTl: '' };
+  }
+  if (type === 'quiz') {
+    return { ...base, type: 'quiz', question: c.front as string, options: [], correct: 0, explanation: (c.context as string) ?? '', source: (c.source as string) ?? '' };
+  }
+  if (type === 'sentence') {
+    return { ...base, type: 'sentence', sentence: c.front as string, sentencePlain: c.front as string, translation: (c.back as string) ?? '', unknown: [], source: (c.source as string) ?? '' };
+  }
+  if (type === 'concept') {
+    return { ...base, type: 'concept', hook: c.front as string, context: (c.context as string) ?? '', source: (c.source as string) ?? '' };
+  }
+  return { ...base, type: 'fact', hook: c.front as string, context: (c.context as string) ?? '', source: (c.source as string) ?? '' };
+}
+
 export function FeedScreen({ dark, onDeeper, onShare, streak }: {
   dark: boolean; streak: number;
   onDeeper: (threadId: string) => void;
   onShare: (card: AnyCard) => void;
 }) {
   const [tab, setTab] = useState('For You');
+  const [cards, setCards] = useState<AnyCard[]>(FEED_CARDS);
+  const [loading, setLoading] = useState(false);
   const muted = dark ? MUTED.dark : MUTED.light;
+
+  useEffect(() => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) return;
+    setLoading(true);
+    fetch(`${apiUrl}/v1/feed`)
+      .then(r => r.json())
+      .then((data: { cards: Record<string, unknown>[] }) => {
+        if (data.cards?.length > 0) {
+          setCards(data.cards.map(apiCardToAnyCard));
+        }
+      })
+      .catch(() => { /* keep mock data on error */ })
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div>
       <FeedHeader dark={dark} tab={tab} setTab={setTab} streak={streak} />
       <FriendsStrip dark={dark} />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '0 10px 100px' }}>
-        {FEED_CARDS.map(c => (
+        {loading && (
+          <div style={{ textAlign: 'center', padding: '20px 0', color: muted, fontSize: 11, fontFamily: '"SF Mono", monospace' }}>
+            loading feed…
+          </div>
+        )}
+        {cards.map(c => (
           <FeedCard key={c.id} data={c} dark={dark} onDeeper={onDeeper} onShare={onShare} />
         ))}
         <div style={{ textAlign: 'center', padding: '20px 0', color: muted, fontSize: 11, fontFamily: '"SF Mono", monospace' }}>
@@ -344,7 +386,7 @@ export function ProfileScreen({ dark, setDark }: { dark: boolean; setDark: (v: b
         <Row label="Dark mode" control={<Toggle on={dark} onClick={() => setDark(!dark)} />} last />
       </Section>
       <Section title="Open source">
-        <Row label="GitHub"        detail="learnscroll/app" />
+        <Row label="GitHub"        detail="flint-app/app" />
         <Row label="Self-host guide" />
         <Row label="Donate"        detail="❤︎" last />
       </Section>

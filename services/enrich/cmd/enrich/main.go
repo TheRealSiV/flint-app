@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/learnscroll/enrich/internal/jobs"
+	"github.com/flint-app/enrich/internal/jobs"
 )
 
 func main() {

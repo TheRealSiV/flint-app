@@ -190,7 +190,7 @@ export default function ArchitecturePage() {
         </h1>
         <p style={{ fontSize: 16, color: muted, lineHeight: 1.55, maxWidth: '60ch' }}>
           An open-source product lives or dies by how readable its repo is. Every choice below favours simplicity, single static binaries, and zero vendor lock — so a stranger can{' '}
-          <Inline>git clone</Inline>, <Inline>docker compose up</Inline>, and run their own LearnScroll in fifteen minutes.
+          <Inline>git clone</Inline>, <Inline>docker compose up</Inline>, and run their own Flint in fifteen minutes.
         </p>
 
         {/* 01 Stack */}
@@ -250,7 +250,7 @@ export default function ArchitecturePage() {
         {/* 04 Content pipeline */}
         <H2 num="04">Content pipeline</H2>
         <Lede>
-          Raw sources → <Inline>lsctl ingest</Inline> → moderation worker → <Inline>cards</Inline> table.
+          Raw sources → <Inline>flint ingest</Inline> → moderation worker → <Inline>cards</Inline> table.
           Community PRs land as YAML in <Inline>/content/</Inline> and flow through the same pipeline.
         </Lede>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 10 }}>
@@ -320,7 +320,7 @@ export default function ArchitecturePage() {
 
         {/* Footer */}
         <div style={{ marginTop: 60, paddingTop: 24, borderTop: `0.5px solid ${line}`, display: 'flex', justifyContent: 'space-between', fontFamily: mono, fontSize: 11, color: muted }}>
-          <span>learnscroll · architecture v0</span>
+          <span>flint · architecture v0</span>
           <a href="/" style={{ color: muted, textDecoration: 'none' }}>← back to app</a>
         </div>
       </div>

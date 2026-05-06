@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-// HookRewriteJob rewrites a raw card hook into the LearnScroll voice:
+// HookRewriteJob rewrites a raw card hook into the Flint voice:
 // punchy, concrete, surprising — one sentence that earns the scroll stop.
 //
 // Prompt strategy: few-shot with curated before/after pairs from fixtures/hooks/.
@@ -26,7 +26,7 @@ func (j *HookRewriteJob) Work(ctx context.Context) error {
 }
 
 // systemPrompt is the shared voice guide injected into every rewrite request.
-const systemPrompt = `You rewrite educational card hooks into the LearnScroll voice.
+const systemPrompt = `You rewrite educational card hooks into the Flint voice.
 
 Rules:
 - One sentence. Max 120 characters.

@@ -24,5 +24,5 @@ jobs:
           done
 
       - name: Check for duplicates (embedding cosine similarity)
-        run: echo "TODO: run lsctl dedupe check against staging DB"
-        # When ready: docker run --rm ghcr.io/learnscroll/ingest lsctl dedupe $f
+        run: echo "TODO: run flint dedupe check against staging DB"
+        # When ready: docker run --rm ghcr.io/flint-app/ingest flint dedupe $f

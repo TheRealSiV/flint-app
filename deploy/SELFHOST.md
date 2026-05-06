@@ -1,4 +1,4 @@
-# Self-hosting LearnScroll in 15 minutes
+# Self-hosting Flint in 15 minutes
 
 ## Requirements
 
@@ -11,7 +11,7 @@
 ### 1. Clone and configure
 
 ```bash
-git clone https://github.com/learnscroll/app
+git clone https://github.com/flint-app/app
 cd app/deploy
 cp .env.example .env
 ```
@@ -28,9 +28,9 @@ The enrich service is optional. If you skip the API key, cards will still work �
 
 ### 2. Point your domain
 
-Add an A record: `learnscroll.yourdomain.com → <server IP>`
+Add an A record: `flint.yourdomain.com → <server IP>`
 
-Edit `caddy/Caddyfile` and replace `learnscroll.app` with your domain.
+Edit `caddy/Caddyfile` and replace `flint.app` with your domain.
 
 ### 3. Start
 
@@ -44,14 +44,14 @@ Caddy will auto-provision a TLS certificate. Give it ~30 seconds.
 ### 4. Seed data (optional)
 
 ```bash
-docker compose exec postgres psql -U learnscroll -d learnscroll \
+docker compose exec postgres psql -U flint -d flint \
   -f /docker-entrypoint-initdb.d/001_dev_cards.sql
 ```
 
 ### 5. Verify
 
 ```bash
-curl https://learnscroll.yourdomain.com/v1/feed
+curl https://flint.yourdomain.com/v1/feed
 ```
 
 You should see `{"cards":[],"nextCursor":""}` until you ingest content.
@@ -63,7 +63,7 @@ You should see `{"cards":[],"nextCursor":""}` until you ingest content.
 wget -O /tmp/tatoeba-ja.tsv https://downloads.tatoeba.org/exports/sentences.tar.bz2
 
 # Run the ingest CLI
-docker compose run --rm api lsctl ingest tatoeba /tmp/tatoeba-ja.tsv
+docker compose run --rm api flint ingest tatoeba /tmp/tatoeba-ja.tsv
 ```
 
 ## Upgrading

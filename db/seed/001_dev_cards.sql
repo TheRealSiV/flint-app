@@ -1,7 +1,7 @@
 -- Dev seed: 5 representative cards, 1 user. Run after migrations.
 
 INSERT INTO users (id, email, handle, language_goal, daily_target)
-VALUES ('00000000-0000-0000-0000-000000000001', 'dev@learnscroll.local', 'dev', 'ja-N4', 10);
+VALUES ('00000000-0000-0000-0000-000000000001', 'dev@flint.local', 'dev', 'ja-N4', 10);
 
 INSERT INTO cards (id, type, language, front, back, context, source_name, tags, approved) VALUES
   ('10000000-0000-0000-0000-000000000001', 'fact', 'en',

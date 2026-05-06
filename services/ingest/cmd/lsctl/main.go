@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/learnscroll/ingest/internal/sources"
+	"github.com/flint-app/ingest/internal/sources"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "lsctl",
-	Short: "LearnScroll content ingest CLI",
+	Use:   "flint",
+	Short: "Flint content ingest CLI",
 }
 
 var ingestCmd = &cobra.Command{

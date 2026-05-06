@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "LearnScroll community card",
+  "title": "Flint community card",
   "type": "object",
   "required": ["type", "language", "front", "source_name", "tags"],
   "additionalProperties": false,

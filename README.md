@@ -1,4 +1,4 @@
-# LearnScroll
+# Flint
 
 Anti-doomscroll. Learn while you scroll — Japanese vocabulary, history, biology, and more, delivered as a continuous feed of bite-sized cards.
 
@@ -11,7 +11,7 @@ _Coming soon_
 ## Quick start (self-host)
 
 ```bash
-git clone https://github.com/learnscroll/app
+git clone https://github.com/flint-app/app
 cd app/deploy
 cp .env.example .env   # fill in POSTGRES_PASSWORD, SESSION_SECRET
 docker compose up -d
@@ -42,7 +42,7 @@ apps/
 services/
   api/          Go REST + WebSocket API
   enrich/       Claude Haiku batch worker
-  ingest/       lsctl CLI (Anki, Tatoeba, Wikipedia, OpenStax)
+  ingest/       flint CLI (Anki, Tatoeba, Wikipedia, OpenStax)
 packages/
   core/         Shared types, API client, FSRS, mix algorithm
   ui/           Shared card components

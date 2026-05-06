@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'LearnScroll',
+  title: 'Flint',
   description: 'Anti-doomscroll — learn while you scroll.',
 };
 

@@ -64,7 +64,7 @@ function ShareCardPreview({ data, ratio }: { data: AnyCard; ratio: string }) {
   const p = CARD_PALETTE[data.type] ?? { bg: '#FAF7F1', text: '#1a1814', label: 'Card' };
   const dims = ratio === '9:16' ? { w: 158, h: 280 } : ratio === '1:1' ? { w: 220, h: 220 } : { w: 280, h: 158 };
   const hookSize = ratio === '9:16' ? 16 : 17;
-  const hook = ('hook' in data ? data.hook : null) ?? ('word' in data ? data.word : null) ?? ('question' in data ? data.question : null) ?? ('sentencePlain' in data ? data.sentencePlain : null) ?? 'LearnScroll';
+  const hook = ('hook' in data ? data.hook : null) ?? ('word' in data ? data.word : null) ?? ('question' in data ? data.question : null) ?? ('sentencePlain' in data ? data.sentencePlain : null) ?? 'Flint';
 
   return (
     <div style={{
@@ -90,7 +90,7 @@ function ShareCardPreview({ data, ratio }: { data: AnyCard; ratio: string }) {
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end',
         fontSize: 9, color: p.text + '99', fontFamily: '"SF Mono", monospace' }}>
-        <span>{'source' in data ? data.source : 'LearnScroll'}</span>
+        <span>{'source' in data ? data.source : 'Flint'}</span>
         <span style={{ fontStyle: 'italic', fontFamily: '"Source Serif 4", serif' }}>
           via Learn<span style={{ color: '#E2861A' }}>scroll</span>
         </span>

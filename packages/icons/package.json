@@ -1,5 +1,5 @@
 {
-  "name": "@learnscroll/icons",
+  "name": "@flint/icons",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.ts",

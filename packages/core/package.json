@@ -1,5 +1,5 @@
 {
-  "name": "@learnscroll/core",
+  "name": "@flint/core",
   "version": "0.1.0",
   "private": true,
   "main": "./src/index.ts",
@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "typescript": "^5",
-    "@learnscroll/config": "workspace:*"
+    "@flint/config": "workspace:*"
   }
 }

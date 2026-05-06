@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/learnscroll/api/internal/ranker"
+	"github.com/flint-app/api/internal/ranker"
 )
 
 func TestSRBoostLiftsOverdueCards(t *testing.T) {

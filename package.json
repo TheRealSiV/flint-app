@@ -1,8 +1,9 @@
 {
-  "name": "learnscroll",
+  "name": "flint",
   "private": true,
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --filter=@flint/web",
+    "dev:mobile": "turbo run dev --filter=@flint/mobile",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test"
